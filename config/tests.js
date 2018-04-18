@@ -1103,4 +1103,420 @@ module.exports = [
       ]
     }
   },
+
+  /*
+   *    TEST N°30
+   */
+  {
+    string: 'welcome && bye',
+
+    // TREE
+    tree: {
+      lexeme: {
+        type: 'and'
+      },
+      left: {
+        lexeme: {
+          type: 'string',
+          value: 'welcome'
+        },
+        left: null,
+        right: null
+      },
+      right: {
+        lexeme: {
+          type: 'string',
+          value: 'bye'
+        },
+        left: null,
+        right: null
+      }
+    },
+
+    // QUERY
+    query: {
+      type: "and",
+      values: [
+        {
+          type: "string",
+          value: "welcome"
+        },
+        {
+          type: "string",
+          value: "bye"
+        }
+      ]
+    }
+  },
+
+  /*
+   *    TEST N°31
+   */
+  {
+    string: 'welcome || bye',
+
+    // TREE
+    tree: {
+      lexeme: {
+        type: 'or'
+      },
+      left: {
+        lexeme: {
+          type: 'string',
+          value: 'welcome'
+        },
+        left: null,
+        right: null
+      },
+      right: {
+        lexeme: {
+          type: 'string',
+          value: 'bye'
+        },
+        left: null,
+        right: null
+      }
+    },
+
+    // QUERY
+    query: {
+      type: "or",
+      values: [
+        {
+          type: "string",
+          value: "welcome"
+        },
+        {
+          type: "string",
+          value: "bye"
+        }
+      ]
+    }
+  },
+
+  /*
+  *    TEST N°32
+  */
+  {
+    string: 'welcome EQ bye',
+
+    // TREE
+    tree: {
+      lexeme: {
+        type: 'eq'
+      },
+      left: {
+        lexeme: {
+          type: 'string',
+          value: 'welcome'
+        },
+        left: null,
+        right: null
+      },
+      right: {
+        lexeme: {
+          type: 'string',
+          value: 'bye'
+        },
+        left: null,
+        right: null
+      }
+    },
+
+    // QUERY
+    query: {
+      type: "eq",
+      values: [
+        {
+          type: "string",
+          value: "welcome"
+        },
+        {
+          type: "string",
+          value: "bye"
+        }
+      ]
+    }
+  },
+
+  /*
+  *    TEST N°33
+  */
+  {
+    string: 'welcome == bye',
+
+    // TREE
+    tree: {
+      lexeme: {
+        type: 'eq'
+      },
+      left: {
+        lexeme: {
+          type: 'string',
+          value: 'welcome'
+        },
+        left: null,
+        right: null
+      },
+      right: {
+        lexeme: {
+          type: 'string',
+          value: 'bye'
+        },
+        left: null,
+        right: null
+      }
+    },
+
+    // QUERY
+    query: {
+      type: "eq",
+      values: [
+        {
+          type: "string",
+          value: "welcome"
+        },
+        {
+          type: "string",
+          value: "bye"
+        }
+      ]
+    }
+  },
+
+  /*
+  *    TEST N°34
+  */
+  {
+    string: 'welcome == bye OR "ahoy" == "hello" AND (why EQ because OR reason)',
+
+    // TREE
+    tree: {
+      lexeme: {
+        type: 'or'
+      },
+      left: {
+        lexeme: {
+          type: 'eq'
+        },
+        left: {
+          lexeme: {
+            type: 'string',
+            value: 'welcome'
+          },
+          left: null,
+          right: null
+        },
+        right: {
+          lexeme: {
+            type: 'string',
+            value: 'bye'
+          },
+          left: null,
+          right: null
+        }
+      },
+      right: {
+        lexeme: {
+          type: 'and'
+        },
+        left: {
+          lexeme: {
+            type: 'eq'
+          },
+          left: {
+            lexeme: {
+              type: 'string',
+              value: 'ahoy'
+            },
+            left: null,
+            right: null
+          },
+          right: {
+            lexeme: {
+              type: 'string',
+              value: 'hello'
+            },
+            left: null,
+            right: null
+          }
+        },
+        right: {
+          lexeme: {
+            type: 'or'
+          },
+          left: {
+            lexeme: {
+              type: 'eq'
+            },
+            left: {
+              lexeme: {
+                type: 'string',
+                value: 'why'
+              },
+              left: null,
+              right: null
+            },
+            right: {
+              lexeme: {
+                type: 'string',
+                value: 'because'
+              },
+              left: null,
+              right: null
+            }
+          },
+          right: {
+            lexeme: {
+              type: 'string',
+              value: 'reason'
+            },
+            left: null,
+            right: null
+          }
+        }
+      }
+    },
+
+    // QUERY
+    query: {
+      type: "or",
+      values: [
+        {
+          type: "eq",
+          values: [
+            {
+              type: "string",
+              value: "welcome"
+            },
+            {
+              type: "string",
+              value: "bye"
+            }
+          ]
+        },
+        {
+          type: "and",
+          values: [
+            {
+              type: "eq",
+              values: [
+                {
+                  type: "string",
+                  value: "ahoy"
+                },
+                {
+                  type: "string",
+                  value: "hello"
+                }
+              ]
+            },
+            {
+              type: "or",
+              values: [
+                {
+                  type: "eq",
+                  values: [
+                    {
+                      type: "string",
+                      value: "why"
+                    },
+                    {
+                      type: "string",
+                      value: "because"
+                    }
+                  ]
+                },
+                {
+                  type: "string",
+                  value: "reason"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  /*
+  *    TEST N°35
+  */
+  {
+    string: 'hello AND NOT',
+    err: 'Empty block just after not'
+  },
+
+  /*
+  *    TEST N°36
+  */
+  {
+    string: 'hello NOT AND',
+    err: 'and just after not'
+  },
+
+  /*
+  *    TEST N°37
+  */
+  {
+    string: 'hello NOT ==',
+    err: 'eq just after not'
+  },
+
+  /*
+   *    TEST N°38
+  */
+  {
+    string: 'hello OR NOT (welcome)',
+
+    // TREE
+    tree: {
+      lexeme: {
+        type: 'or'
+      },
+      left: {
+        lexeme: {
+          type: 'string',
+          value: 'hello'
+        },
+        left: null,
+        right: null
+      },
+      right: {
+        lexeme: {
+          type: 'not'
+        },
+        left: {
+          lexeme: {
+            type: 'string',
+            value: 'welcome'
+          },
+          left: null,
+          right: null
+        },
+        right: null
+      }
+    },
+
+    // QUERY
+    query: {
+      type: "or",
+      values: [
+        {
+          type: "string",
+          value: "hello"
+        },
+        {
+          type: "not",
+          values: [
+            {
+              type: "string",
+              value: "welcome"
+            }
+          ]
+        }
+      ]
+    }
+  },
+
 ];

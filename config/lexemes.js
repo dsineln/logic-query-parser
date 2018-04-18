@@ -9,17 +9,37 @@ var andLexeme = {
   lexer: lexerHelper.generateCutLexer('and', 3),
   syntaxer: syntaxerHelper.andSyntaxer,
   priority: 4,
-  checker: ['endBlock', null]
+  checker: { negative: ['endBlock', null] }
+};
+
+var andAmpersandLexeme = {
+  regexp: '&&(\\s|\\(|\\)|"|$)',
+  escaped: true,
+  modifiers: 'i',
+  lexer: lexerHelper.generateCutLexer('and', 2),
+  syntaxer: syntaxerHelper.andSyntaxer,
+  priority: 4,
+  checker: { negative: ['endBlock', null]}
 };
 
 var orLexeme = {
-  regexp: 'or(\\s|\\(|\\)|"|$)',
+  regexp: '(or|\\|\\|)(\\s|\\(|\\)|"|$)',
   escaped: true,
   modifiers: 'i',
   lexer: lexerHelper.generateCutLexer('or', 2),
   syntaxer: syntaxerHelper.orSyntaxer,
   priority: 5,
-  checker: ['endBlock', null]
+  checker: { negative: ['endBlock', null] }
+};
+
+var equalLexeme = {
+  regexp: '(eq|==)(\\s|"|$)',
+  escaped: true,
+  modifiers: 'i',
+  lexer: lexerHelper.generateCutLexer('eq', 2),
+  syntaxer: syntaxerHelper.eqSyntaxer,
+  priority: 3,
+  checker: { positive: ['string', null] }
 };
 
 var notLexeme = {
@@ -29,7 +49,7 @@ var notLexeme = {
   lexer: lexerHelper.generateCutLexer('not', 3),
   syntaxer: syntaxerHelper.notSyntaxer,
   priority: 1,
-  checker: ['endBlock', null]
+  checker: { positive: ['startBlock','string', null]}
 };
 
 var startBlockLexeme = {
@@ -39,7 +59,7 @@ var startBlockLexeme = {
   syntaxer: syntaxerHelper.blockSyntaxer,
   priority: 0,
   postFunction: postHelper.blockPostTreatment,
-  checker: ['endBlock', null]
+  checker: { negative: ['endBlock', null]}
 };
 
 var endBlockLexeme = {
@@ -57,7 +77,9 @@ var stringLexeme = {
 
 module.exports = {
   and: andLexeme,
+  andAmpersand: andAmpersandLexeme,
   or: orLexeme,
+  eq: equalLexeme,
   not: notLexeme,
   startBlock: startBlockLexeme,
   endBlock: endBlockLexeme,
