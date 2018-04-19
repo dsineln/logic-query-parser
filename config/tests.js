@@ -1519,4 +1519,40 @@ module.exports = [
     }
   },
 
+  /*
+  *    TEST N°39
+  */
+  {
+    string: '[]',
+    err: 'Empty array'
+  },
+
+  /*
+  *    TEST N°40
+  */
+  {
+    string: '["some"',
+    err: 'Bad end of block'
+  },
+
+  /*
+  *    TEST N°41
+  */
+  {
+    string: '"some"]',
+    err: 'Unexpected token endArray'
+  },
+
+  /*
+  *    TEST N°42
+  */
+  {
+    string: '[ AND hello',
+    err: 'and just after startArray'
+  },
+
+
+
+
+
 ];

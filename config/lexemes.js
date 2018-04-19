@@ -3,7 +3,7 @@ var syntaxerHelper = require('../lib/helpers/syntaxer.js');
 var postHelper = require('../lib/helpers/post.js');
 
 var andLexeme = {
-  regexp: 'and(\\s|\\(|\\)|"|$)',
+  regexp: 'and(\\s|\\(|"|$)',
   escaped: true,
   modifiers: 'i',
   lexer: lexerHelper.generateCutLexer('and', 3),
@@ -13,7 +13,7 @@ var andLexeme = {
 };
 
 var andAmpersandLexeme = {
-  regexp: '&&(\\s|\\(|\\)|"|$)',
+  regexp: '&&(\\s|\\(|"|$)',
   escaped: true,
   modifiers: 'i',
   lexer: lexerHelper.generateCutLexer('and', 2),
@@ -23,7 +23,7 @@ var andAmpersandLexeme = {
 };
 
 var orLexeme = {
-  regexp: '(or|\\|\\|)(\\s|\\(|\\)|"|$)',
+  regexp: '(or|\\|\\|)(\\s|\\(|"|$)',
   escaped: true,
   modifiers: 'i',
   lexer: lexerHelper.generateCutLexer('or', 2),
@@ -33,7 +33,7 @@ var orLexeme = {
 };
 
 var equalLexeme = {
-  regexp: '(eq|==)(\\s|"|$)',
+  regexp: '(eq|==)(\\s|\\(|"|$)',
   escaped: true,
   modifiers: 'i',
   lexer: lexerHelper.generateCutLexer('eq', 2),
@@ -43,13 +43,22 @@ var equalLexeme = {
 };
 
 var notLexeme = {
-  regexp: 'not(\\s|\\(|\\)|"|$)',
+  regexp: 'not(\\s|\\(|"|$)',
   escaped: true,
   modifiers: 'i',
   lexer: lexerHelper.generateCutLexer('not', 3),
   syntaxer: syntaxerHelper.notSyntaxer,
   priority: 1,
   checker: { positive: ['startBlock','string', null]}
+};
+
+var commaLexeme = {
+  regexp: ',(\\s|"|$)',
+  escaped: true,
+  lexer: lexerHelper.generateCutLexer('comma', 1),
+  syntaxer: syntaxerHelper.commaSyntaxer,
+  priority: 0,
+  checker: { positive: ['string', null]}
 };
 
 var startBlockLexeme = {
@@ -68,6 +77,22 @@ var endBlockLexeme = {
   lexer: lexerHelper.generateCutLexer('endBlock', 1),
 };
 
+var startArrayLexeme = {
+  regexp: '\\[',
+  escaped: true,
+  lexer: lexerHelper.generateCutLexer('startArray', 1),
+  syntaxer: syntaxerHelper.arraySyntaxer,
+  priority: 0,
+  postFunction: postHelper.blockPostTreatment,
+  checker: { positive: ['string', null] }
+};
+
+var endArrayLexeme = {
+  regexp: '\\]',
+  escaped: true,
+  lexer: lexerHelper.generateCutLexer('endArray', 1),
+};
+
 var stringLexeme = {
   regexp: '"?.*',
   lexer: lexerHelper.stringLexer([startBlockLexeme, endBlockLexeme]),
@@ -81,7 +106,10 @@ module.exports = {
   or: orLexeme,
   eq: equalLexeme,
   not: notLexeme,
+  comma: commaLexeme,
   startBlock: startBlockLexeme,
   endBlock: endBlockLexeme,
+  startArray: startArrayLexeme,
+  endArray: endArrayLexeme,
   string: stringLexeme
 };
