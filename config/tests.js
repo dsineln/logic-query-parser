@@ -1,9 +1,7 @@
 'use strict';
 
 module.exports = [
-  /*
-   *    TEST N°1
-   */
+
   {
     string: 'welcome AND bye',
 
@@ -46,9 +44,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°2
-   */
   {
     string: 'welcome OR bye',
 
@@ -91,9 +86,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°3
-   */
   {
     string: 'welcome AND bye AND hello',
 
@@ -153,9 +145,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°4
-   */
   {
     string: 'welcome OR bye AND hello',
 
@@ -220,9 +209,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°5
-   */
   {
     string: 'welcome AND bye OR hello',
 
@@ -287,9 +273,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°6
-   */
   {
     string: '(welcome OR bye) AND hello',
 
@@ -354,9 +337,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°7
-   */
   {
     string: '(welcome OR bye) AND (hello OR ahoy)',
 
@@ -443,9 +423,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°8
-   */
   {
     string: '"hello there" OR "welcome here"',
 
@@ -488,76 +465,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°9
-   */
-  {
-    string: '"hello there" OR welcome here',
-
-    // TREE
-    tree: {
-      lexeme: {
-        type: "or"
-      },
-      left: {
-        lexeme: {
-          type: "string",
-          value: "hello there"
-        },
-        left: null,
-        right: null
-      },
-      right: {
-        lexeme: {
-          type: "and"
-        },
-        left: {
-          lexeme: {
-            type: "string",
-            value: "welcome"
-          },
-          left: null,
-          right: null
-        },
-        right: {
-          lexeme: {
-            type: "string",
-            value: "here"
-          },
-          left: null,
-          right: null
-        }
-      }
-    },
-
-    // QUERY
-    query: {
-      type: "or",
-      values: [
-        {
-          type: "string",
-          value: "hello there"
-        },
-        {
-          type: "and",
-          values: [
-            {
-              type: "string",
-              value: "welcome"
-            },
-            {
-              type: "string",
-              value: "here"
-            }
-          ]
-        }
-      ]
-    }
-  },
-
-  /*
-   *    TEST N°10
-   */
   {
     string: '"hello OR there"',
 
@@ -578,9 +485,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°11
-   */
   {
     string: '"hello there" AND ("welcome here" OR ahoy)',
 
@@ -645,9 +549,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°12
-   */
   {
     string: '"hello (" AND ") there"',
 
@@ -690,116 +591,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°13
-   */
-  {
-    string: 'hello (welcome)',
-
-    // TREE
-    tree: {
-      lexeme: {
-        type: "and"
-      },
-      left: {
-        lexeme: {
-          type: "string",
-          value: "hello"
-        },
-        left: null,
-        right: null
-      },
-      right: {
-        lexeme: {
-          type: "string",
-          value: "welcome"
-        },
-        left: null,
-        right: null
-      }
-    },
-
-    // QUERY
-    query: {
-      type: "and",
-      values: [
-        {
-          type: "string",
-          value: "hello"
-        },
-        {
-          type: "string",
-          value: "welcome"
-        }
-      ]
-    }
-  },
-
-  /*
-   *    TEST N°14
-   */
-  {
-    string: '\\(hello bye\\) welcome',
-
-    // TREE
-    tree: {
-      lexeme: {
-        type: "and"
-      },
-      left: {
-        lexeme: {
-          type: "string",
-          value: "(hello"
-        },
-        left: null,
-        right: null
-      },
-      right: {
-        lexeme: {
-          type: "and"
-        },
-        left: {
-          lexeme: {
-            type: "string",
-            value: "bye)"
-          },
-          left: null,
-          right: null
-        },
-        right: {
-          lexeme: {
-            type: "string",
-            value: "welcome"
-          },
-          left: null,
-          right: null
-        }
-      }
-    },
-
-    // QUERY
-    query: {
-      type: "and",
-      values: [
-        {
-          type: "string",
-          value: "(hello"
-        },
-        {
-          type: "string",
-          value: "bye)"
-        },
-        {
-          type: "string",
-          value: "welcome"
-        }
-      ]
-    }
-  },
-
-  /*
-   *    TEST N°15
-   */
   {
     string: 'hello\\ \\OR\\ there',
 
@@ -820,147 +611,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°15
-   */
-  {
-    string: '"(welcome hello)"',
-
-    // TREE
-    tree: {
-      lexeme: {
-        type: "string",
-        value: "(welcome hello)"
-      },
-      left: null,
-      right: null
-    },
-
-    // QUERY
-    query: {
-      type: "string",
-      value: "(welcome hello)"
-    }
-  },
-
-  /*
-   *    TEST N°17
-   */
-  {
-    string: '("hello',
-    err: "Can't reach end of quoted string"
-  },
-
-  /*
-   *    TEST N°18
-   */
-  {
-    string: ')" bye" (',
-    err: 'end of string just after startBlock'
-  },
-
-  /*
-   *    TEST N°19
-   */
-  {
-    string: 'test"',
-    err: 'Can\'t reach end of quoted string'
-  },
-
-  /*
-   *    TEST N°20
-   */
-  {
-    string: 'bye)',
-    err: 'Unexpected token endBlock'
-  },
-
-  /*
-   *    TEST N°21
-   */
-  {
-    string: '',
-
-    // TREE
-    tree: {},
-
-    // QUERY
-    query: {}
-  },
-
-  /*
-   *    TEST N°22
-   */
-  {
-    string: 'and test',
-    err: 'Nothing before and block'
-  },
-
-  /*
-   *    TEST N°23
-   */
-  {
-    string: 'or test',
-    err: 'Nothing before or block'
-  },
-
-  /*
-   *    TEST N°24
-   */
-  {
-    string: 'android',
-
-    // TREE
-    tree: {
-      lexeme: {
-        type: "string",
-        value: "android"
-      },
-      left: null,
-      right: null
-    },
-
-    // QUERY
-    query: {
-      type: "string",
-      value: "android"
-    }
-  },
-
-  /*
-   *    TEST N°25
-   */
-  {
-    string: 'orroid',
-
-    // TREE
-    tree: {
-      lexeme: {
-        type: "string",
-        value: "orroid"
-      },
-      left: null,
-      right: null
-    },
-
-    // QUERY
-    query: {
-      type: "string",
-      value: "orroid"
-    }
-  },
-
-  /*
-   *    TEST N°26
-   */
-  {
-    string: '()',
-    err: 'Empty block'
-  },
-
-  /*
-   *    TEST N°27
-   */
   {
     string: 'NOT welcome',
 
@@ -992,9 +642,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°28
-   */
   {
     string: 'hello AND NOT welcome',
 
@@ -1048,9 +695,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°29
-   */
   {
     string: 'hello OR NOT welcome',
 
@@ -1104,9 +748,60 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°30
-   */
+
+  {
+    string: 'hello OR NOT (welcome)',
+
+    // TREE
+    tree: {
+      lexeme: {
+        type: 'or'
+      },
+      left: {
+        lexeme: {
+          type: 'string',
+          value: 'hello'
+        },
+        left: null,
+        right: null
+      },
+      right: {
+        lexeme: {
+          type: 'not'
+        },
+        left: {
+          lexeme: {
+            type: 'string',
+            value: 'welcome'
+          },
+          left: null,
+          right: null
+        },
+        right: null
+      }
+    },
+
+    // QUERY
+    query: {
+      type: "or",
+      values: [
+        {
+          type: "string",
+          value: "hello"
+        },
+        {
+          type: "not",
+          values: [
+            {
+              type: "string",
+              value: "welcome"
+            }
+          ]
+        }
+      ]
+    }
+  },
+
   {
     string: 'welcome && bye',
 
@@ -1149,9 +844,6 @@ module.exports = [
     }
   },
 
-  /*
-   *    TEST N°31
-   */
   {
     string: 'welcome || bye',
 
@@ -1194,9 +886,6 @@ module.exports = [
     }
   },
 
-  /*
-  *    TEST N°32
-  */
   {
     string: 'welcome EQ bye',
 
@@ -1239,9 +928,6 @@ module.exports = [
     }
   },
 
-  /*
-  *    TEST N°33
-  */
   {
     string: 'welcome == bye',
 
@@ -1284,9 +970,6 @@ module.exports = [
     }
   },
 
-  /*
-  *    TEST N°34
-  */
   {
     string: 'welcome == bye OR "ahoy" == "hello" AND (why EQ because OR reason)',
 
@@ -1439,76 +1122,76 @@ module.exports = [
     }
   },
 
-  /*
-  *    TEST N°35
-  */
   {
-    string: 'hello AND NOT',
-    err: 'Empty block just after not'
-  },
-
-  /*
-  *    TEST N°36
-  */
-  {
-    string: 'hello NOT AND',
-    err: 'and just after not'
-  },
-
-  /*
-  *    TEST N°37
-  */
-  {
-    string: 'hello NOT ==',
-    err: 'eq just after not'
-  },
-
-  /*
-   *    TEST N°38
-  */
-  {
-    string: 'hello OR NOT (welcome)',
-
+    string: 'value IN [hello, bye, welcome]',
     // TREE
     tree: {
       lexeme: {
-        type: 'or'
+        type: 'in'
       },
       left: {
         lexeme: {
           type: 'string',
-          value: 'hello'
+          value: 'value'
         },
         left: null,
         right: null
       },
       right: {
         lexeme: {
-          type: 'not'
+          type: 'comma'
         },
         left: {
           lexeme: {
             type: 'string',
-            value: 'welcome'
+            value: 'hello'
           },
           left: null,
           right: null
         },
-        right: null
+        right: {
+          lexeme: {
+            type: 'comma'
+          },
+          left: {
+            lexeme: {
+              type: 'string',
+              value: 'bye'
+            },
+            left: null,
+            right: null
+          },
+          right: {
+            lexeme: {
+              type: 'string',
+              value: 'welcome'
+            },
+            left: null,
+            right: null
+          }
+        }
       }
     },
 
     // QUERY
     query: {
-      type: "or",
+      type: "in",
       values: [
         {
           type: "string",
-          value: "hello"
+          value: "value"
         },
         {
-          type: "not",
+          type: "comma",
           values: [
+            {
+              type: "string",
+              value: "hello"
+            },
+            {
+              type: "string",
+              value: "bye"
+            },
             {
               type: "string",
               value: "welcome"
@@ -1519,40 +1202,208 @@ module.exports = [
     }
   },
 
-  /*
-  *    TEST N°39
-  */
+  /*{
+    string: 'value NOT IN [hello, bye, welcome]',
+    // TREE
+    tree: {
+      lexeme: {
+        type: "not"
+      },
+      left: {
+        lexeme: {
+          type: 'string',
+          value: 'value'
+        },
+        left: null,
+        right: null
+      },
+      right: {
+        lexeme: {
+          type: 'in'
+        },
+        left: {
+          lexeme: {
+            type: 'comma'
+          },
+          left: {
+            lexeme: {
+              type: 'string',
+              value: 'hello'
+            },
+            left: null,
+            right: null
+          },
+          right: {
+            lexeme: {
+              type: 'comma'
+            },
+            left: {
+              lexeme: {
+                type: 'string',
+                value: 'bye'
+              },
+              left: null,
+              right: null
+            },
+            right: {
+              lexeme: {
+                type: 'string',
+                value: 'welcome'
+              },
+              left: null,
+              right: null
+            }
+          }
+        }
+      }
+    },
+
+    // QUERY
+    query: {
+      type: "in",
+      values: [
+        {
+          type: "string",
+          value: "value"
+        },
+        {
+          type: "comma",
+          values: [
+            {
+              type: "string",
+              value: "hello"
+            },
+            {
+              type: "string",
+              value: "bye"
+            },
+            {
+              type: "string",
+              value: "welcome"
+            }
+          ]
+        }
+      ]
+    }
+  },*/
+
+  {
+    string: '[hello, bye, welcome]',
+    err: "TODO: fail"
+  },
+
+  {
+    string: '"(welcome hello)"',
+    err: "TODO: fail"
+  },
+
+  {
+    string: 'android',
+    err: "TODO: fail"
+  },
+
+  {
+    string: 'orroid',
+    err: "TODO: fail"
+  },
+
+  {
+    string: 'hello (welcome)',
+    err: 'startBlock just after string'
+  },
+
+  {
+    string: '\\(hello bye\\) welcome',
+    err: 'lack of operator in between two strings'
+  },
+
+  {
+    string: '("hello',
+    err: "Can't reach end of quoted string"
+  },
+
+  {
+    string: ')" bye" (',
+    err: 'startBlock just after string'
+  },
+
+  {
+    string: 'test"',
+    err: 'Can\'t reach end of quoted string'
+  },
+
+  {
+    string: 'bye)',
+    err: 'Unexpected token endBlock'
+  },
+
+  {
+    string: '',
+    err: 'Empty query string'
+  },
+
+  {
+    string: '()',
+    err: 'Empty block'
+  },
+
+  {
+    string: 'and test',
+    err: 'Nothing before and block'
+  },
+
+  {
+    string: 'or test',
+    err: 'Nothing before or block'
+  },
+
+  {
+    string: 'hello AND NOT',
+    err: 'Empty block just after not'
+  },
+
+  {
+    string: 'hello NOT AND',
+    err: 'and just after not'
+  },
+
+  {
+    string: 'hello NOT ==',
+    err: 'eq just after not'
+  },
+
   {
     string: '[]',
     err: 'Empty array'
   },
 
-  /*
-  *    TEST N°40
-  */
   {
     string: '["some"',
     err: 'Bad end of block'
   },
 
-  /*
-  *    TEST N°41
-  */
   {
     string: '"some"]',
     err: 'Unexpected token endArray'
   },
 
-  /*
-  *    TEST N°42
-  */
   {
     string: '[ AND hello',
     err: 'and just after startArray'
   },
 
+  {
+    string: '"hello there" OR welcome here',
+    err: "lack of operator in between two strings"
+  },
 
+  {
+    string: 'IN [hello, bye, welcome]',
+    err : 'Nothing before in block'
+  },
 
-
-
+  {
+    string: 'field IN ',
+    err : 'Empty block just after in'
+  },
 ];

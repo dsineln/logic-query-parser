@@ -39,7 +39,7 @@ var equalLexeme = {
   lexer: lexerHelper.generateCutLexer('eq', 2),
   syntaxer: syntaxerHelper.eqSyntaxer,
   priority: 3,
-  checker: { positive: ['string', null] }
+  checker: { mandatory: ['string', null] }
 };
 
 var notLexeme = {
@@ -49,7 +49,7 @@ var notLexeme = {
   lexer: lexerHelper.generateCutLexer('not', 3),
   syntaxer: syntaxerHelper.notSyntaxer,
   priority: 1,
-  checker: { positive: ['startBlock','string', null]}
+  checker: { mandatory: ['startBlock','string', 'in', null]}
 };
 
 var commaLexeme = {
@@ -58,7 +58,17 @@ var commaLexeme = {
   lexer: lexerHelper.generateCutLexer('comma', 1),
   syntaxer: syntaxerHelper.commaSyntaxer,
   priority: 0,
-  checker: { positive: ['string', null]}
+  checker: { mandatory: ['string', null]}
+};
+
+var inLexeme = {
+  regexp: 'in(\\s|$)',
+  escaped: true,
+  modifiers: 'i',
+  lexer: lexerHelper.generateCutLexer('in', 2),
+  syntaxer: syntaxerHelper.inSyntaxer,
+  priority: 1,
+  checker: { mandatory: ['startArray', null]}
 };
 
 var startBlockLexeme = {
@@ -84,7 +94,7 @@ var startArrayLexeme = {
   syntaxer: syntaxerHelper.arraySyntaxer,
   priority: 0,
   postFunction: postHelper.blockPostTreatment,
-  checker: { positive: ['string', null] }
+  checker: { mandatory: ['string', null] }
 };
 
 var endArrayLexeme = {
@@ -95,8 +105,9 @@ var endArrayLexeme = {
 
 var stringLexeme = {
   regexp: '"?.*',
-  lexer: lexerHelper.stringLexer([startBlockLexeme, endBlockLexeme]),
+  lexer: lexerHelper.stringLexer([startBlockLexeme, endBlockLexeme, startArrayLexeme, endArrayLexeme, commaLexeme]),
   syntaxer: syntaxerHelper.stringSyntaxer,
+  checker: { negative: ['string', 'startBlock', null] },
   priority: 0
 };
 
@@ -107,6 +118,7 @@ module.exports = {
   eq: equalLexeme,
   not: notLexeme,
   comma: commaLexeme,
+  in: inLexeme,
   startBlock: startBlockLexeme,
   endBlock: endBlockLexeme,
   startArray: startArrayLexeme,
